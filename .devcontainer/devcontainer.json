@@ -1,8 +1,30 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/rust:1",
-  "updateContentCommand": ["cargo", "build"],
-  "postAttachCommand": ["rustlings", "watch"],
-  "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/target/debug"
-  }
+    "name": "Rustlings",
+    "image": "debian:bookworm-slim",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "files.autoSave": "onFocusChange",
+                "editor.formatOnSave": true
+            },
+            "extensions": [
+                "editorconfig.editorconfig",
+                "pkief.material-icon-theme",
+                "streetsidesoftware.code-spell-checker"
+            ]
+        }
+    },
+    "remoteEnv": {
+        "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/target/debug:/home/rust/.cargo/bin",
+        "CARGO_HOME": "/home/rust/.cargo"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/rust:1": {},
+        "ghcr.io/nils-geistmann/devcontainers-features/create-remote-user:0": {},
+        "ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {
+            "theme": "agnoster",
+            "plugins": "git"
+        }
+    },
+    "remoteUser": "rust"
 }
